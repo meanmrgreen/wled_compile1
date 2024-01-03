@@ -1,4 +1,4 @@
-name: ESP01 - WLED compile
+name: ESP32 - Audio Reactive compile
 
 on:
     workflow_dispatch:
@@ -27,10 +27,10 @@ jobs:
         find /tmp/WLEDtemp -maxdepth 1 -mindepth 1 -name "*" -type d >> /tmp/WLEDtemp/wledfoldername
         cd `cat /tmp/WLEDtemp/wledfoldername`
         echo '[env:custom_build]' >>platformio.ini
-        echo 'extends = env:esp01_1m_full' >>platformio.ini
-        echo 'build_flags = ${env:esp01_1m_full.build_flags} -D LEDPIN=3 -D BTNPIN=0 -D RLYPIN=12 -D RLYMDE=0 -D IRPIN=5 -D USERMOD_AUDIOREACTIVE' >>platformio.ini
+        echo 'extends = env:esp32dev' >>platformio.ini
+        echo 'build_flags = ${env:esp32dev.build_flags} -D WLED_ENABLE_MQTT -D WLED_ENABLE_WEBSOCKETS -D WLED_ENABLE_ADALIGHT -D USERMOD_AUDIOREACTIVE -D USERMOD_AUTO_SAVE' >>platformio.ini
         echo 'lib_deps = ' >>platformio.ini
-        echo '  ${env:esp01_1m_full.lib_deps}' >>platformio.ini
+        echo '  ${env:esp32dev.lib_deps}' >>platformio.ini
         echo '  https://github.com/blazoncek/arduinoFFT.git' >>platformio.ini
         
         pio run -e custom_build || pio run -e custom_build
