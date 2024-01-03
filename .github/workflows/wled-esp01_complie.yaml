@@ -1,4 +1,4 @@
-name: WLED compile
+name: ESP01 - WLED compile
 
 on:
     workflow_dispatch:
